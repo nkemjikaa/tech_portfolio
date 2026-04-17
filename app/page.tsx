@@ -113,7 +113,7 @@ function Hero() {
         </h1>
 
         {/* Subheading / Summary */}
-        <p className="text-xl text-slate-600 max-w-2xl leading-relaxed">
+        <p className="text-xl text-slate-600 max-w-2xl leading-relaxed text-justify">
           Computer Science and Artificial Intelligence engineer with experience building production-grade mobile and data systems. Founder and Lead Product Engineer of Good2go, a peer-to-peer marketplace platform using Flutter, Firebase, and Amazon Web Services. Skilled in mobile and web development with a strong focus on system reliability, scalability, and user-centered product development.
         </p>
 
