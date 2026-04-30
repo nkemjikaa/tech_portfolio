@@ -20,6 +20,8 @@
 }
 
 body {
+  background-color: transparent !important;
+  color: #111; /* Or your preferred text color */
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -27,7 +29,14 @@ body {
 }
 
 html {
+  background-color: #ffffff; /* This is the bottom-most layer */
   scroll-behavior: smooth !important;
   /* Adjust '5rem' (80px) to match the height of your Navbar */
   scroll-padding-top: 5rem;
+  cursor: crosshair !important; /* Options: default, crosshair, cell, vertical-text, etc. */
 }
+
+a, button {
+  cursor: pointer;
+}
+

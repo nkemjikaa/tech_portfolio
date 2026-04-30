@@ -1,6 +1,8 @@
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
+import DotGrid from './components/DotGrid';
+import React, { useState, useEffect } from 'react';
 
 const projects = [
   {
@@ -53,7 +55,8 @@ const services = [
 
 export default function Home() {
   return (
-    <main className="bg-white">
+    <main className="relative bg-transparent">
+      <DotGrid />
       <Navbar />
       <Hero />
       <ProjectsGrid />
@@ -64,8 +67,30 @@ export default function Home() {
 }
 
 function Navbar() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      // Logic: Hide if scrolling down, Show if scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => window.removeEventListener('scroll', controlNavbar);
+  }, [lastScrollY]);
   return (
-    <nav className="fixed top-0 left-0 w-full z-[100] bg-white/80 backdrop-blur-md">
+    <nav className={`fixed top-0 left-0 w-full z-[100] bg-white/80 backdrop-blur-md border-b border-slate-100 transition-transform duration-500 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo Area */}
         <div className="flex items-center gap-2">
@@ -77,7 +102,7 @@ function Navbar() {
             className="rounded-lg"
           />
           <span className="font-bold text-xl tracking-tight text-slate-900">
-            Nkemjika John Richard Anyaehie
+            
           </span>
         </div>
 
@@ -100,7 +125,9 @@ function Navbar() {
 function Hero() {
   return (
     <main className="pt-20"> {/* pt-20 is 80px in Tailwind */}
-    <section className="min-h-screen flex items-center justify-center bg-white px-6">
+    <section className="relative min-h-screen flex items-center justify-center bg-transparent px-6">
+      <DotGrid />
+
       <div className="max-w-4xl w-full space-y-8">
         {/* Badge */}
         <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-medium border border-blue-100">
@@ -109,7 +136,7 @@ function Hero() {
 
         {/* Heading */}
         <h1 className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight">
-          Building <span className="text-green-900">consumer-focused</span> solutions with AI and code.
+          Building <span className="text-green-900">consumer focused</span> solutions with AI and code.
         </h1>
 
         {/* Subheading / Summary */}
@@ -137,7 +164,7 @@ function Hero() {
         </div>
 
         {/* Trust Signals / Tech Stack Icons (Simple Text for now) */}
-        <div className="pt-12 border-t border-slate-100 flex flex-col gap-4">
+        <div className="pt-12 border-t border-slate-100 flex flex-col gap-4 mb-4">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Trusted Tech Stack</p>
           <div className="flex gap-6 text-slate-500 font-medium">
             <span>Next.js</span>
@@ -150,7 +177,7 @@ function Hero() {
       </div>
     </section>
     <section id="services" className="py-20 bg-slate-50/50">
-  <div className="max-w-6xl mx-auto">
+  <div className="max-w-6xl mx-auto px-6">
     <div className="mb-12">
       <h2 className="text-3xl font-bold text-slate-900 mb-4">Expertise & Services</h2>
       <p className="text-slate-600 max-w-2xl">

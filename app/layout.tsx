@@ -24,10 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="..." suppressHydrationWarning>
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>        
+        {/* Main content sits on top */}
+        <main className="relative z-10">
+          {children}
+        </main>
       </body>
     </html>
-    
   );
 }
