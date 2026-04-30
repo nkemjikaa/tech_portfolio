@@ -28,7 +28,7 @@ const projects = [
   },
   {
     title: "Coca-Cola Web Experience",
-    description: "An interactive, high-fidelity 3D web application featuring custom made modelled assests and dynamic environments to enhance digital brand engagement.",
+    description: "An interactive, high-fidelity 3D web application featuring custom made modelled assets and dynamic environments to enhance digital brand engagement.",
     tags: ["Autodesk Maya", "PHP", "3D Modeling"],
     link: "https://users.sussex.ac.uk/~njra20/assignment/index.html",
     gitlink: "https://github.com/nkemjikaa/public_html",
