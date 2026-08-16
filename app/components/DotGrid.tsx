@@ -11,16 +11,25 @@ export default function DotGrid() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let mouse = { x: -1000, y: -1000 };
+    const mouse = { x: -1000, y: -1000 };
 
     const gap = 45;
     const dotSize = 1.5;
     const proximity = 120;
 
+    // CSS-pixel dimensions of the grid; the backing store is scaled by DPR on top
+    let width = 0;
+    let height = 0;
+
     const handleResize = () => {
-  // Use window dimensions directly to ensure full screen coverage
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+      // Use window dimensions directly to ensure full screen coverage
+      const dpr = window.devicePixelRatio || 1;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      // Draw in CSS pixels; the transform keeps dots crisp on retina displays
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -30,15 +39,15 @@ export default function DotGrid() {
       mouse.y = e.clientY - rect.top;
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     handleResize();
 
     const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const cols = Math.ceil(canvas.width / gap);
-      const rows = Math.ceil(canvas.height / gap);
+      ctx.clearRect(0, 0, width, height);
+
+      const cols = Math.ceil(width / gap);
+      const rows = Math.ceil(height / gap);
 
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
