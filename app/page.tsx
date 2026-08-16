@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import DotGrid from './components/DotGrid';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const projects = [
   {
@@ -68,25 +68,22 @@ export default function Home() {
 
 function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // Held in a ref so the listener is registered once, not re-bound on every scroll
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
 
       // Logic: Hide if scrolling down, Show if scrolling up
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
+      setIsVisible(!(currentScrollY > lastScrollY.current && currentScrollY > 100));
+
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', controlNavbar);
+    window.addEventListener('scroll', controlNavbar, { passive: true });
     return () => window.removeEventListener('scroll', controlNavbar);
-  }, [lastScrollY]);
+  }, []);
   return (
     <nav className={`fixed top-0 left-0 w-full z-[100] bg-white/80 backdrop-blur-md border-b border-slate-100 transition-transform duration-500 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
@@ -94,16 +91,14 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo Area */}
         <div className="flex items-center gap-2">
-          <Image 
-            src="/sign.svg" // Replace with your actual filename
-            alt="Logo"
-            width={150} 
-            height={40}
+          <Image
+            src="/sign.svg"
+            alt="Nkemjika Anyaehie"
+            width={160}
+            height={60} /* sign.svg is 1024x384, so 8:3 */
+            priority
             className="rounded-lg"
           />
-          <span className="font-bold text-xl tracking-tight text-slate-900">
-            
-          </span>
         </div>
 
         {/* Quick Links - Good for Freelance Credibility */}
@@ -124,10 +119,8 @@ function Navbar() {
 
 function Hero() {
   return (
-    <main className="pt-20"> {/* pt-20 is 80px in Tailwind */}
+    <div className="pt-20"> {/* pt-20 (80px) clears the fixed h-20 navbar */}
     <section className="relative min-h-screen flex items-center justify-center bg-transparent px-6">
-      <DotGrid />
-
       <div className="max-w-4xl w-full space-y-8">
         {/* Badge */}
         <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-medium border border-blue-100">
@@ -213,7 +206,7 @@ function Hero() {
     </div>
   </div>
 </section>
-    </main>
+    </div>
   );
 }
 

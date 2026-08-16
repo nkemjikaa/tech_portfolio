@@ -12,28 +12,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* This design is light-only: the page sits on a white canvas (see DotGrid), so
+   the palette is fixed rather than following prefers-color-scheme. */
 
 body {
-  background-color: transparent !important;
-  color: #111; /* Or your preferred text color */
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  padding-top: 80px;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 html {
-  background-color: #ffffff; /* This is the bottom-most layer */
-  scroll-behavior: smooth !important;
-  /* Adjust '5rem' (80px) to match the height of your Navbar */
+  background-color: var(--background); /* This is the bottom-most layer */
+  scroll-behavior: smooth;
+  /* Matches the height of the fixed Navbar (h-20) */
   scroll-padding-top: 5rem;
-  cursor: crosshair !important; /* Options: default, crosshair, cell, vertical-text, etc. */
+  cursor: crosshair;
 }
 
 a, button {
