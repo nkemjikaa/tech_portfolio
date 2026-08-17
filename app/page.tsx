@@ -9,7 +9,7 @@ const projects = [
     title: "Good2Go (G2G)",
     description: "A P2P marketplace for preloved items in Nigeria, built with Flutter and Firebase to encourage local reuse and circular economy.",
     tags: ["Flutter", "Firebase", "Product Ownership"],
-    link: "#", // Add link when ready
+    link: "https://youtube.com/shorts/EOIYnnN9eoI?feature=share",
     gitlink: "#",
   },
   {
