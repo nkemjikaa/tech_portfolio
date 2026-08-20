@@ -13,6 +13,13 @@ const projects = [
     gitlink: "#",
   },
   {
+    title: "ụlọ (Property Marketplace)",
+    description: "A property and land marketplace for Nigeria where every listing is verified against land-registry records and graded on a four-level trust scale before it reaches the map — with access rules enforced at the database layer to fight title fraud.",
+    tags: ["Next.js", "TypeScript", "PostgreSQL"],
+    link: "#",
+    gitlink: "#",
+  },
+  {
     title: "Food Access System",
     description: "Secure mobile identity system for food subsidization, implementing 7-day validation rules and Passport/Voter's Card verification.",
     tags: ["Dart", "Identity Management", "Security"],
@@ -52,6 +59,12 @@ const services = [
     icon: "🧠"
   }
 ];
+
+// A link is only worth rendering if it points somewhere real; "#" and empty
+// strings are placeholders for projects whose demo or repo isn't public yet.
+function isRealLink(href: string | undefined): href is string {
+  return !!href && href !== "#";
+}
 
 export default function Home() {
   return (
@@ -240,25 +253,29 @@ function ProjectsGrid() {
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 {project.description}
               </p>
+              {/* Only render a link when there's a real destination — a "#"
+                  placeholder would otherwise open a blank tab. */}
               <div className="flex items-center gap-4 mt-4">
-              <Link 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-sm font-bold text-slate-900 flex items-center gap-2 hover:text-green-900 transition-colors"
-              >
-                View Project <span className="text-sm font-bold text-slate-900 flex items-center gap-2 hover:text-green-900 transition-colors">→</span>
-              </Link>
+              {isRealLink(project.link) && (
               <a
-            
-                href={project.gitlink} 
-                target="_blank" 
+                href={project.link}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-slate-900 flex items-center gap-2 hover:text-green-900 transition-colors"
               >
-                Go to GitHub <span className="text-sm font-bold text-slate-900 flex items-center gap-2 hover:text-green-900 transition-colors">→</span>
-  
+                View Project <span>→</span>
               </a>
+              )}
+              {isRealLink(project.gitlink) && (
+              <a
+                href={project.gitlink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold text-slate-900 flex items-center gap-2 hover:text-green-900 transition-colors"
+              >
+                Go to GitHub <span>→</span>
+              </a>
+              )}
               </div>
             </div>
           ))}
