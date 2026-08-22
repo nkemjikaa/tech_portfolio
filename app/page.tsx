@@ -20,6 +20,13 @@ const projects = [
     gitlink: "#",
   },
   {
+    title: "TERMVIS (Terminal Visualiser)",
+    description: "A browser and command-line tool that rebuilds any video or audio track as live ASCII art on a terminal-style canvas, reacting in real time to the music. The site runs entirely on-device with the Canvas and Web Audio APIs; a matching Python/FFmpeg renderer exports the same effect at full resolution.",
+    tags: ["Canvas", "Web Audio API", "Python"],
+    link: "https://termvis.vercel.app/",
+    gitlink: "#", // repo is private
+  },
+  {
     title: "Food Access System",
     description: "Secure mobile identity system for food subsidization, implementing 7-day validation rules and Passport/Voter's Card verification.",
     tags: ["Dart", "Identity Management", "Security"],
@@ -147,7 +154,7 @@ function Hero() {
 
         {/* Subheading / Summary */}
         <p className="text-xl text-slate-600 max-w-2xl leading-relaxed text-justify">
-          Computer Science and Artificial Intelligence engineer with experience building production-grade mobile and data systems. Founder and Lead Product Engineer of Good2go, a peer-to-peer marketplace platform using Flutter, Firebase, and Amazon Web Services. Skilled in mobile and web development with a strong focus on system reliability, scalability, and user-centered product development.
+          CS &amp; AI engineer building production-grade mobile and web systems. Founder and Lead Product Engineer of Good2go, a p2p marketplace platform using Flutter, Firebase and third-party APIs. Skilled in mobile and web development with an emphasis on AI automation using Claude Code to build systems that are consumer-focused.
         </p>
 
         {/* CTA Buttons */}
@@ -178,6 +185,7 @@ function Hero() {
             <span>Firebase</span>
             <span>AWS</span>
             <span>Python</span>
+            <span>Claude</span>
           </div>
         </div>
       </div>
